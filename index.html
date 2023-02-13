@@ -74,31 +74,4 @@
 
 </html>
 
-// Ejemplo funcion constructora. 
 
-function crearStock(nombre, color, tamaño, exterior, xMetro) {
-    this.nombre = nombre;
-    this.color = color;
-    this.tamaño = tamaño;
-    this.exterior = exterior;
-
-    this.mostrarExito = function () {
-        console.log("Éxito, has ingresado el nuevo producto " + this.nombre + " al sistema stock")
-    }
-}
-// El empleado debe ingresar los datos del nuevo producto en el negocio (Funcionalidad para la empresa, no para el cliente.)
-
-let nombre = prompt("Ingrese el nombre del nuevo producto para generar stock");
-let color = prompt("Ingrese color del producto");
-let tamaño = prompt("Ingrese tamaño del producto");
-let exterior = prompt("Ingrese si el producto es apto para uso exterior");
-
-// Finalmente se crean dos prooductos: uno con datos del "empleado" y otro con datos predeterminados.
-
-const producto1 = new crearStock(nombre, color, tamaño, exterior)
-const producto2 = new crearStock("Romano", "Negro", "50x50cm", true)
-
-console.log(producto1)
-console.log(producto2)
-
-producto1.mostrarExito();
