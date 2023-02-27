@@ -1,0 +1,32 @@
+main {
+    background-color: black;
+    color: antiquewhite;
+}
+
+.imgPadre{
+    margin: 0 auto;
+    color: black;
+    background-color: rgb(237, 227, 227);   
+    .imgProductos {
+    width: 100%;
+    height: 50%;
+    object-fit: contain;
+    border-radius: 15px;
+    border: 4px black solid;
+}
+
+.boton{
+    background-color: black;
+    color: whitesmoke;
+    margin-bottom: 5px;
+}
+
+.boton:hover{
+    transform: scale(1.1);
+}
+
+
+}
+
+
+
