@@ -21,7 +21,11 @@ console.log(productos)
 
 let compra = [];
 
-const carrito = document.getElementById("carrito");
+if (localStorage.getItem ("compra")){
+    compra = JSON.parse (localStorage.getItem ("compra"))
+}
+
+const contenedor = document.getElementById("contenedor");
 
 const carritoCargado = () => {
     productos.forEach(producto => {
@@ -36,14 +40,14 @@ const carritoCargado = () => {
             <h3> ${producto.color}</h3>
             <h3> ${producto.exterior ? "Apto para uso exterior" : "No apto para uso exterior"}</h3>
             <p> ${producto.precio}</p>
-            <button " id="boton${producto.id}"> Agregar a mi compra </button>
+            <button class="boton" id="boton${producto.id}"> Agregar a mi compra </button>
             </div>
             </div>`
-        carrito.appendChild(card);
+        contenedor.appendChild(card);
 
-        const boton = document.getElementById (`boton${producto.id}`);
+        const boton = document.getElementById(`boton${producto.id}`);
         boton.addEventListener("click", () => {
-            agregarAlCarrito(producto.id)
+            agregarAlCarrito(producto.id);
         })
     })
 }
@@ -57,11 +61,43 @@ const agregarAlCarrito = (id) => {
         const producto = productos.find(producto => producto.id === id);
         compra.push(producto);
     }
-    console.log(compra)
+    calculoTotal();
+    localStorage.setItem("compra", JSON.stringify(compra));
     }
 
-const contenedorCarrito = document.getElementById("contenedorCarrito");
-const verCaarrito = document.getElementById ("vaciarCarrito")
+const contenedorCompra = document.getElementById("contenedorCompra");
+const verCarrito = document.getElementById("verCarrito");
 
+verCarrito.addEventListener ("click", () => {
+    mostrarCarrito();
+})
+
+const mostrarCarrito = () => {
+    contenedorCarrito.innerHTML = "";
+    compra.forEach(producto => {
+        const card = document.createElement("div");
+        card.classList.add('card', 'w-75', 'mb-3', "imgPadre")
+        card.innerHTML = `
+            <div>
+            <img src = "${producto.img}" class = "card-img-top imgProductos" alt = "${producto.nombre}">
+            <div>
+            <h2> ${producto.nombre}</h2>
+            <h3> ${producto.tamaño}</h3>
+            <h3> ${producto.color}</h3>
+            <h3> ${producto.exterior ? "Apto para uso exterior" : "No apto para uso exterior"}</h3>
+            <p> ${producto.precio}</p>
+            <h3> ${producto.cantidad}</h3>
+            <button " id="boton${producto.id}"> Elimminar de mi compra </button>
+            </div>
+            </div>`
+            contenedorCarrito.appendChild (card);
+
+            const boton = document.getElementById (`eliminar${producto.id}`);
+            boton.addEventListener ("click", () => {
+                eliminarDelCarrito (producto.id);
+            })
+    })
+calculoTotal();
+}
 
 
